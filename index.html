@@ -8,10 +8,45 @@
 	
 }
  td {
-	padding: 8px;
+	padding: 8pt;
 	font-size: .9em;
  }
- tr.accountTotal td {background-color:sienna;}
+ 
+ table {
+	float:left;width:300pt;
+	border-spacing: 0pt;
+    border-collapse: separate;
+	margin: 20px;
+ }
+ 
+ tr.small td {
+ 	font-size: .8em;
+	padding-left: 20pt;
+ }
+
+ .color0 td {
+	background-color: #b5c1c0;
+ }
+ .color1 td {
+	background-color: #b9e6ad;
+ }
+ .color2 td {
+	background-color: #f2daf6;
+ }
+ .color3 td {
+	background-color: #ece6cc;
+ }
+ .color4 td {
+	background-color: #f6b9ac;
+ }
+ 
+ .color5 td {
+	background-color: #f3afd2;
+ }
+ 
+ td.right {
+	text-align:right;
+ }
  </style>
  
 <script type="text/javascript" src="jquery-2.1.0.js"></script>
@@ -19,7 +54,8 @@
 </head>
 <body>
  
-<div style="width: 700px; margin: 0 auto;">
+<div style="width: 700pt; margin: 0 auto;">
+
 <script type="text/javascript">
  
 $(document).ready(function(){
@@ -42,7 +78,7 @@ $(document).ready(function(){
 	
 	function formatCurrency(amount)
 	{
-		return "$" + amount.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+		return amount.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
 	}
 
 	function parseXML(xml){
@@ -57,11 +93,11 @@ $(document).ready(function(){
 			var account_categories = $(xml).xpath("records/account_categorys/account_category[account_type_id='" + childVal(account_types[index], "id") + "']");
 			for (index2 = 0; index2 < account_categories.length; ++index2) {
 	
-				tablehtml += "<tr class=\"accountTotal\"><td>" + childVal(account_categories[index2], "name") + "</td><td>" + childCurrVal(account_categories[index2], "total") + "</td></tr>";
+				tablehtml += "<tr class=\"color" + index2 + "\"><td>" + childVal(account_categories[index2], "name") + "</td><td class=\"right\">$" + childCurrVal(account_categories[index2], "total") + "</td></tr>";
 	
 				var accounts = $(xml).xpath("records/accounts/account[account_category_id='" + childVal(account_categories[index2], "account_category_id") + "']");
 				for (index3 = 0; index3 < accounts.length; ++index3) {
-					tablehtml += "<tr><td>" + childVal(accounts[index3], "account_name") + "</td><td>" + childCurrVal(accounts[index3], "account_balance") + "</td></tr>";
+					tablehtml += "<tr class=\"small\"><td>" + childVal(accounts[index3], "account_name") + "</td><td class=\"right\">" + childCurrVal(accounts[index3], "account_balance") + "</td></tr>";
 				}
 								
 				
@@ -77,14 +113,18 @@ $(document).ready(function(){
 		
 		tablehtml += "<tr><td>Equity</td><td>" + formatCurrency(networth) + "</td></tr>";
 		
-		$("#thetable").html(tablehtml);
+		$("#assets").html(tablehtml);
 		
 	} 
 });
  
 </script>
  
-<table id="thetable">
+<table id="assets">
+	<tr><td>asdf</td></tr>
+</table>
+
+<table id="liabilities">
 	<tr><td>asdf</td></tr>
 </table>
  
