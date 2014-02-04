@@ -1,0 +1,94 @@
+<html>
+<head>
+<title>Net Worth Statement</title>
+ 
+ <style>
+ body {
+	font-family: LucidaGrande, Geneva, Arial, Helvetica;
+	
+}
+ td {
+	padding: 8px;
+	font-size: .9em;
+ }
+ tr.accountTotal td {background-color:sienna;}
+ </style>
+ 
+<script type="text/javascript" src="jquery-2.1.0.js"></script>
+<script type="text/javascript" src="jquery.xpath.js"></script>
+</head>
+<body>
+ 
+<div style="width: 700px; margin: 0 auto;">
+<script type="text/javascript">
+ 
+$(document).ready(function(){
+ 
+	$.ajax({
+		url: "endpoint/summary.php",
+		context: document.body,
+		success: parseXML
+	});
+	
+	function childVal(node, childName)
+	{
+		return $(node).xpath(childName + "/text()")[0].nodeValue;
+	}
+	
+	function childCurrVal(node, childName)
+	{
+		return formatCurrency(parseFloat(childVal(node, childName)));
+	}
+	
+	function formatCurrency(amount)
+	{
+		return "$" + amount.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+	}
+
+	function parseXML(xml){
+		var account_types = $(xml).xpath("records/account_types/account_type");
+		//alert(nodes.length);
+		
+		var tablehtml = "";
+		var total = 0;
+		
+		for (index = 0; index < account_types.length; ++index) {
+			
+			var account_categories = $(xml).xpath("records/account_categorys/account_category[account_type_id='" + childVal(account_types[index], "id") + "']");
+			for (index2 = 0; index2 < account_categories.length; ++index2) {
+	
+				tablehtml += "<tr class=\"accountTotal\"><td>" + childVal(account_categories[index2], "name") + "</td><td>" + childCurrVal(account_categories[index2], "total") + "</td></tr>";
+	
+				var accounts = $(xml).xpath("records/accounts/account[account_category_id='" + childVal(account_categories[index2], "account_category_id") + "']");
+				for (index3 = 0; index3 < accounts.length; ++index3) {
+					tablehtml += "<tr><td>" + childVal(accounts[index3], "account_name") + "</td><td>" + childCurrVal(accounts[index3], "account_balance") + "</td></tr>";
+				}
+								
+				
+	
+			}
+			
+			tablehtml += "<tr><td>" + childVal(account_types[index], "name") + "</td><td>" + childCurrVal(account_types[index], "total") + "</td></tr>";
+		}
+		
+		var assets = parseFloat($(xml).xpath("records/account_types/account_type[name='Asset']/total/text()")[0].nodeValue);
+		var liabilities = parseFloat($(xml).xpath("records/account_types/account_type[name='Liability']/total/text()")[0].nodeValue);
+		var networth = assets-liabilities;
+		
+		tablehtml += "<tr><td>Equity</td><td>" + formatCurrency(networth) + "</td></tr>";
+		
+		$("#thetable").html(tablehtml);
+		
+	} 
+});
+ 
+</script>
+ 
+<table id="thetable">
+	<tr><td>asdf</td></tr>
+</table>
+ 
+</div>
+</body>
+
+<html>
