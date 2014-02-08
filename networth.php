@@ -4,22 +4,6 @@
 
 <style>
 
-body {
-	font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
-	color: #333333;
-	padding: 20pt;
-	background-color: #333333;
-}
-
-div.mainbody {
-	width: 600pt;
-	margin: 0pt auto;
-	background-color: #f3f3ec;
-	overflow: hidden;
-	min-height: 90%;
-	padding: 20pt;
-}
-
 td {
 	padding-left: 8pt;
 	padding-right: 8pt;
@@ -85,28 +69,6 @@ tr.titleRow td.right {
 	
 }
 
-
-
- div.color0 {
-	background-color: #b5c1c0;
- }
- div.color1 {
-	background-color: #b9e6ad;
- }
- div.color2 {
-	background-color: #f2daf6;
- }
- div.color3 {
-	background-color: #ece6cc;
- }
- div.color4 {
-	background-color: #f6b9ac;
- }
- 
- div.color5 {
-	background-color: #f3afd2;
- }
-
  span.titleLabel {
  	display:inline-block;
  	padding-top: 2pt;
@@ -128,22 +90,43 @@ tr.titleRow td.right {
 <script type="text/javascript" src="jquery-2.1.0.js"></script>
 <script type="text/javascript" src="jquery.xpath.js"></script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<link rel="stylesheet" type="text/css" href="css/style.css">
 
 </head>
 <body>
  
 <div class="mainbody">
 
-
 <script type="text/javascript">
 
 google.load("visualization", "1", {packages:["corechart"]});
 
+var summaryUrl = "endpoint/summary.php?nonzero=true<?php
+
+	$date = new DateTime();
+	if(isset($_GET['BSType']))
+	{
+		if($_GET['BSType'] == "eolm")
+			$date->modify("last day of previous month");
+		elseif($_GET['BSType'] == "eoly")
+		{
+			$date->setDate(intval($date->format("Y"))-1, 12, 31);
+			//$date->modify("-1 year");
+			//$date = $strtotime($date->format("Y") . "-12-31 -1 year");
+		}
+			
+		
+	}
+	
+	echo "&date=" . $date->format("m/d/Y");
+	
+	/*(isset($_GET['date']) ? "&date=" . $_GET['date'] : "")*/
+?>";
  
 $(document).ready(function(){
  
 	$.ajax({
-		url: "endpoint/summary.php?nonzero=true",
+		url: summaryUrl,
 		context: document.body,
 		success: parseXML
 	});
@@ -236,8 +219,11 @@ $(document).ready(function(){
 		var liabilities = parseFloat($(xml).xpath("records/account_types/account_type[name='Liability']/total/text()")[0].nodeValue);
 		var networth = assets-liabilities;
 		
-		$("#networth").html("$" + formatCurrency(networth) + "<div style=\"font-size: .7em; font-weight:normal \">Net Worth</div>");
-
+		<?php
+			$Date = new DateTime($_GET['date']);
+		?>
+		$("#networth").html("$" + formatCurrency(networth) + "<div style=\"font-size: .6em; font-weight:normal;\">Net Worth</div><div style=\"font-size: .5em; font-weight:normal; padding-bottom:10pt;\">As of <?=$date->format('F j, Y')?></div>");
+	
 		//tablehtml += "<tr><td>Equity</td><td>" + formatCurrency(networth) + "</td></tr>";
 		
 		/*$("#assets").html(tablehtml);*/
@@ -247,7 +233,7 @@ $(document).ready(function(){
  
 </script>
 
-<div id="networth" style="font-size: 2em;">asdfasdf</div>
+<div id="networth" class="pageTitle">asdfasdf</div>
 
 <table id="assets">
 	<tr><td>asdf</td></tr>

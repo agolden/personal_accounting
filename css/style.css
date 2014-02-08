@@ -1,0 +1,90 @@
+body {
+	font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+	color: #333333;
+	padding: 20pt;
+	background-color: #333333;
+}
+
+div.mainbody {
+	width: 600pt;
+	margin: 0pt auto;
+	background-color: #f3f3ec;
+	overflow: hidden;
+	padding: 20pt;
+	min-height: 100%; /*fallback*/
+    min-height: calc(100% - 40pt);
+}
+
+html {-webkit-animation: safariSelectorFix infinite 1s;}
+@-webkit-keyframes safariSelectorFix {
+	0% {zoom:1;} 
+	100% {zoom:1;}
+}
+
+.hidden {
+	display: none;
+}
+
+div.accordion {
+	font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+}
+
+div.accordion .ui-accordion-content {
+	background-color: #fff;
+	font-size: .8em;
+	padding-top: 0pt;
+	padding-bottom: 0pt;
+}
+
+div.accordion .ui-accordion-header{
+	background-image: none;
+	font-weight: bold;
+	font-size: .9em;
+}  
+
+div.accordion h3 {
+	overflow: hidden;
+}
+
+div.accordion h3 span.diminutive{ font-size: .8em; font-weight: normal;}
+
+div.accordion h3 span{float:left; clear: left;}
+
+#accordion > h3 {
+	margin-top: 10px;
+}
+
+#accordion > h3:first-child {
+	margin-top: 0;
+}
+
+ .color0 {
+	background-color: #b5c1c0;
+ }
+ .color1 {
+	background-color: #b9e6ad;
+ }
+ .color2 {
+	background-color: #f2daf6;
+ }
+ .color3 {
+	background-color: #ece6cc;
+ }
+ .color4 {
+	background-color: #f6b9ac;
+ }
+ .color5 {
+	background-color: #f3afd2;
+ }
+ 
+ .pageTitle {
+	font-size: 2em;
+ }
+ 
+ span.datepicker {
+	visibility: hidden;
+ }
+ 
+ span.datepicker input {
+	margin-left: 6pt;
+ }
