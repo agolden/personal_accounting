@@ -87,10 +87,10 @@ tr.titleRow td.right {
  }
  </style>
  
-<script type="text/javascript" src="jquery-2.1.0.js"></script>
-<script type="text/javascript" src="jquery.xpath.js"></script>
+<script type="text/javascript" src="lib/jquery-2.1.0.js"></script>
+<script type="text/javascript" src="lib/jquery.xpath.js"></script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="lib/style.css">
 
 </head>
 <body>
