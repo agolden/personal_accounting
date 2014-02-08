@@ -1,3 +1,11 @@
+<?php
+	session_start();
+	if (!isset($_SESSION['authenticated']))
+		header( 'Location: index.php' );
+	else
+	{
+?>
+
 <html>
 <head>
 <title>Net Worth Statement</title>
@@ -247,3 +255,7 @@ $(document).ready(function(){
 </body>
 
 <html>
+
+<?php
+	}
+?>

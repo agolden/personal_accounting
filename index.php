@@ -4,7 +4,12 @@
 
 	$errorMessage = "";
 	
-	if (isset($_POST["username"]))
+	if (isset($_SESSION['authenticated']))
+	{
+		header( 'Location: financial_reports.php' );
+	}
+	
+	elseif (isset($_POST["username"]))
 	{
 		$conn = (new DatabaseConnection)->getConn();
 		

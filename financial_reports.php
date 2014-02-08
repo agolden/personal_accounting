@@ -1,3 +1,11 @@
+<?php
+	session_start();
+	if (!isset($_SESSION['authenticated']))
+		header( 'Location: index.php' );
+	else
+	{
+?>
+
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -96,3 +104,6 @@ $(function() {
 
 </body>
 </html>
+<?php
+	}
+?>
