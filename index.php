@@ -6,7 +6,7 @@
 	
 	if (isset($_SESSION['authenticated']))
 	{
-		header( 'Location: financial_reports.php' );
+		header( 'Location: snstv/landing.php' );
 	}
 	
 	elseif (isset($_POST["username"]))
@@ -54,8 +54,8 @@
 			//print "<p>Authentication failed: " . $auth->getMessage();
 			//print "<p>Debug output from server: " . $yubi->getLastResponse();
 		} else {
-			print "<p>You are authenticated!";
 			$_SESSION['authenticated'] = true;
+			header( 'Location: snstv/landing.php' );
 		}
 	}
 	else
