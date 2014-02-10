@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/jquery-1.9.1.js"></script>
 <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-<link rel="stylesheet" type="text/css" href="lib/style.css">
+<link rel="stylesheet" type="text/css" href="../lib/style.css">
 <script>
 history.navigationMode = 'compatible';
 $(document).ready(function(){
@@ -70,7 +70,7 @@ $(function() {
 <div class="accordion" id="accordion">
   <h3 class="color0"><span>Balance Sheet / Net Worth Statement</span><span class="diminutive">A summary listing of assets, liabilities, and the resulting net worth.</span></h3>
   <div>
-    <p><form action="networth.php">
+    <p><form action="balance_sheet.php">
 			<div><input type="radio" name="BSType" value="mra" checked="true">Most Recent Available</div>
 			<div><input type="radio" name="BSType" value="eolm">End of Last Month</div>
 			<div><input type="radio" name="BSType" value="eoly">End of Last Year</div>
