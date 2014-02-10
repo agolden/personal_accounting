@@ -1,9 +1,10 @@
 <?php
 	session_start();
 	if (!isset($_SESSION['authenticated']))
-		header( 'Location: index.php' );
-	else
 	{
+		header( 'Location: login.php?dest=' . urlencode($_SERVER['REQUEST_URI']) );
+		die();
+	}
 ?><!DOCTYPE HTML>
 <html>
 	<head>
@@ -85,16 +86,16 @@
 			}
 		</style>
  
-		<script type="text/javascript" src="../lib/jquery-2.1.0.js"></script>
-		<script type="text/javascript" src="../lib/jquery.xpath.js"></script>
+		<script type="text/javascript" src="lib/jquery-2.1.0.js"></script>
+		<script type="text/javascript" src="lib/jquery.xpath.js"></script>
 		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-		<link rel="stylesheet" type="text/css" href="../lib/style.css" />
+		<link rel="stylesheet" type="text/css" href="lib/style.css" />
 
 		<script type="text/javascript">
 		/* <![CDATA[ */
 			google.load("visualization", "1", {packages:["corechart"]});
 
-			var summaryUrl = "../endpoint/balance_sheet.php?nonzero=true<?php
+			var summaryUrl = "endpoint/balance_sheet.php?nonzero=true<?php
 
 			$date = new DateTime();
 			if(isset($_GET['BSType']))
@@ -220,7 +221,3 @@
 		</div>
 	</body>
 </html>
-
-<?php
-	}
-?>
