@@ -48,7 +48,7 @@
 				?>
 					<img src="images/yubikey.png" alt="" />
 					<br/>One time password: <input type="text" name="OTP"/>
-					<br/><input type="submit"/>	<input type="hidden" name="dest" value="<?=$dest?>" />
+					<br/><input type="submit" value="Submit"/>	<input type="hidden" name="dest" value="<?=$dest?>" />
 				<?php
 				
 			} else {
@@ -86,8 +86,10 @@
 	<head>
 		<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 		<title>Welcome!</title>
+		<link rel="stylesheet" type="text/css" href="lib/style.css" />
 	</head>
 	<body>
+		<div class="mainbody">
 		<form action="login.php" method="post">
 			<p>	
 <?php
@@ -98,7 +100,7 @@
 ?>
 			Username: <input type="text" name="username"/>
 			<br />Password: <input type="password" name="pwd" />
-			<br/><input type="submit"/>	
+			<br/><input type="submit" value="Submit"/>	
 			<input type="hidden" name="dest" value="<?=$dest?>" />
 <?php
 		
@@ -118,5 +120,6 @@
 ?>
 			</p>
 		</form>
+		</div>
 	</body>
 </html>
